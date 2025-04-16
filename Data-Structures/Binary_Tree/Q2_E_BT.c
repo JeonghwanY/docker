@@ -98,6 +98,25 @@ int maxHeight(BTNode *node)
 
 {
     /* add your code here */
+    // int count_left=0,count_right=0;
+    // BTNode *left_1=node->left,*right_1=node->right;
+    // while(left_1!=NULL){
+    //     ++count_left;
+    //     left_1=left_1->left;
+    // }
+    // while(right_1!=NULL){
+    //     ++count_right;
+    //     right_1=right_1->right;
+    // }
+    // if (left_1<right_1 || left_1==right_1){
+    //     return count_right;
+    // }else{
+    //     return count_left;
+    // }
+    if (node == NULL) return -1;
+    int leftmax = maxHeight(node->left);
+    int rightmax = maxHeight(node->right);
+    return (leftmax>rightmax ? leftmax : rightmax) +1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

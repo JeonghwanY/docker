@@ -91,6 +91,25 @@ int main()
 int insertSortedLL(LinkedList *ll, int item)
 {
 	/* add your code here */
+	// 뭘 먼저 구현해야해 오름차순이 되게 index의 위치를 구해야지
+	int index=0;
+	ListNode* cur;
+	cur=ll->head;
+	while (cur!=NULL){
+		if (cur->item==item)
+			return -1;
+		if (cur -> item >item)
+			break;
+		cur = cur->next;
+		index++;
+	}
+	if (insertNode(ll,index,item)==0)///////////이부분 그냥 이 함수만 리턴했었음.
+		return index;
+	else
+		return -1;
+	
+
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -149,37 +168,35 @@ ListNode *findNode(LinkedList *ll, int index){
 
 	return temp;
 }
+//insertNode -> 인덱스에 값을 추가하는 것 파이썬에서는 .append() 
+//c에서는 리스트노드, 값, 다음노드 주소가 필요함. 각각을 포인터로 가져온다.
 
 int insertNode(LinkedList *ll, int index, int value){
 
-	ListNode *pre, *cur;
-
-	if (ll == NULL || index < 0 || index > ll->size + 1)
+	ListNode *newnode,*prev;
+	if(ll==NULL||0>index||index>ll->size)//ll널을 확인하는게 연결리스트자체가 없으면 노드를 추가못하니까
 		return -1;
+	newnode=(ListNode *)malloc(sizeof(ListNode));
+	if (newnode==NULL) return -1;////////////메모리 할당 실패대비라는데 좀 알아둬야할듯
 
-	// If empty list or inserting first node, need to update head pointer
-	if (ll->head == NULL || index == 0){
-		cur = ll->head;
-		ll->head = malloc(sizeof(ListNode));
-		ll->head->item = value;
-		ll->head->next = cur;
-		ll->size++;
-		return 0;
+	//ll->head=newnode;
+	newnode->item=value;
+	newnode->next=NULL;//왜 index가 아닌가? index는 아래에서 정해주려나?
+	//index가 head일때 0일때
+	if (index==0){
+		newnode->next=ll->head;//////////이거 좀 중요하다 잘 알아두기
+		ll->head=newnode;
+	}else{//인덱스가 중앙이나 끝일때 어떻게 삽입을 할까
+		prev=findNode(ll,index-1);//인덱스가 현재 넣으려고하는값의 바로 앞을 찾는 것
+		if(prev==NULL) return -1;
+		newnode->next=prev->next;///다음주소를 연결해주는거 뉴노드의 넥스트값은 2고
+		prev->next=newnode;//뉴노드를 넥스트값으로 가지는 prev는 노드 1이다
+
 	}
+	ll->size++;
 
-
-	// Find the nodes before and at the target position
-	// Create a new node and reconnect the links
-	if ((pre = findNode(ll, index - 1)) != NULL){
-		cur = pre->next;
-		pre->next = malloc(sizeof(ListNode));
-		pre->next->item = value;
-		pre->next->next = cur;
-		ll->size++;
-		return 0;
-	}
-
-	return -1;
+	
+	return 0;
 }
 
 

@@ -21,6 +21,8 @@ typedef struct _linkedlist
 {
 	int size;
 	ListNode *head;
+
+	
 } LinkedList;			// You should not change the definition of LinkedList
 
 
@@ -82,12 +84,89 @@ int main()
 	return 0;
 }
 
-//////////////////////////////////////////////////////////////////////////////////
 
-void moveOddItemsToBack(LinkedList *ll)
-{
-	/* add your code here */
+void moveOddItemsToBack(LinkedList *ll){
+	ListNode *cur=ll->head,*prev=NULL,*newnext,*tail=ll->head;
+	int size;
+	size=ll->size;
+	while (tail->next != NULL) {
+		tail = tail->next;
+	}
+	while(size){//&& cur!=NULL
+		newnext=cur->next;
+		//cur=cur->next;
+		if (cur->item%2!=0){
+			if(prev==NULL){
+    			ll->head=newnext;
+			}else{
+				prev->next=newnext;
+			}
+			tail->next=cur;
+			tail=cur;
+			cur->next=NULL;
+		}else{
+			prev=cur;
+		}
+		cur=newnext;
+		size--;
+
+	}
+
+
+
+
 }
+	// 	ListNode *nextcur,*odd_tail=NULL,*odd_head=NULL,*even_tail=NULL,*even_head=NULL,*cur;
+// 	cur=ll->head;
+// 	while (cur!=NULL){
+// 		nextcur=cur->next;
+// 		cur->next=NULL;
+// 		if (cur->item%2!=0){
+// 			if (odd_head==NULL){
+// 			odd_head=cur;
+// 			odd_tail=cur;
+// 			}else{
+// 				odd_tail->next=cur;
+// 				odd_tail=cur;
+// 			}
+// 		}
+// 		else{
+// 			if (even_head==NULL){
+// 				even_head=cur;
+// 				even_tail=cur;
+// 				}else{
+// 					even_tail->next=cur;
+// 					even_tail=cur;
+// 				}
+// 		}
+// 		cur=nextcur;
+// 	}
+	
+// 	even_tail->next=odd_head;
+	
+// }
+	// size=ll->size;
+	// cur=ll->head;
+	// tail=ll->tail;
+	// prev=NULL;
+	// while(size){
+	// 	if(cur->item%2!=0){
+	// 		newnode=cur;
+	// 		tail->next=newnode;
+	// 		tail=newnode;
+	// 		newnode->next=NULL;
+	// 		if (prev==NULL){
+	// 			ll->head=cur->next;
+	// 		}else{
+	// 			prev->next=cur->next;
+	// 		}
+	// 	}else{
+	// 		prev=cur;
+	// 	}
+	// 	cur=cur->next;
+	// 	size--;
+	// 	ll->tail = tail;
+	// }
 
 ///////////////////////////////////////////////////////////////////////////////////
 

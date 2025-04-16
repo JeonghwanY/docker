@@ -104,7 +104,51 @@ int main()
 int isStackPairwiseConsecutive(Stack *s)
 {
   /* add your code here */
+  Stack new; //////////지역변수로 선언
+//   new.ll.head=NULL;
+//   new.ll.tail=NULL;
+//   new.ll.size=0;
+  int new_s,new_s1,add;
+  int ispairwise=1;
+  if(s->ll.size%2!=0){
+	return 0;
+  }
+  while(!isEmptyStack(s)){
+	 	new_s=pop(s);
+	 	new_s1=pop(s);
+		if (abs(new_s-new_s1)!=1) {
+			ispairwise=0;		// 		return printf("not pairwise consecutive\n");
+  	}
+	push(&new,new_s1);//new의 주소에 new_s1의 값을 넣는다는거야?
+	push(&new,new_s);
+  }
+  while(!isEmptyStack(&new)){
+	push(s,pop(&new));
+  }
+  return ispairwise;
 }
+
+
+
+
+//   Stack * new=NULL;
+//   int new_s,new_s1,add;
+//   while(!isEmptyStack(s)){
+// 	new_s=pop(s);
+// 	new_s1=pop(s);
+// 	if(new==NULL){
+// 		add=abs(new_s-new_s1);
+// 		new=add;
+// 	}
+// 	else if (abs(new_s-new_s1)!=new) {
+// 		return printf("not pairwise consecutive\n");
+// 	}
+//   }
+//   return printf("pairwise consecutive\n");
+  
+ 
+
+//}
 
 //////////////////////////////////////////////////////////////////////////////////
 

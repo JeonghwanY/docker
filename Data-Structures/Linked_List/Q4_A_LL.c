@@ -87,6 +87,29 @@ int main()
 void moveEvenItemsToBack(LinkedList *ll)
 {
 	/* add your code here */
+	ListNode *cur=ll->head,*prev=NULL,*tail=ll->head,*newnext;
+	int size=ll->size;//연결리스트 사이즈 할당
+	while (tail->next!=NULL){//tail 초기 값 구하기
+		tail=tail->next;
+	}
+	while (size){//size가 0이되면 자동으로 false처리
+		newnext=cur->next;//아래에서 cur 현재노드를
+		if (cur->item%2==0){//현재 노드가 짝수일때
+			if (prev==NULL){//이전값이 NULL일때(첫번째값일때)
+				ll->head=newnext;//헤드노드를 바꿔준다/////////////이걸 안했었네
+			}else{
+				prev->next=newnext;//이전노드와 다음노드를 연결해준다
+			}
+			tail->next=cur;//가장 끝 tail다음에 cur를 연결해줌
+			tail=cur;//tail을 cur로 바꿔줌
+			cur->next=NULL;//cur의 넥스트주소를 널로 만들어줌
+			
+		}else{//현재노드가 홀수일때 가만히 있음
+			prev=cur;// 이전값을 현재노드로 설정
+		}
+		cur=newnext;//다음노드로 현재노드를 설정
+		size--;//반복을했으니 횟수를 하나 줄임
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

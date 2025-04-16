@@ -117,6 +117,11 @@ int identical(BTNode *tree1, BTNode *tree2)
 
 {
    /* add your code here */
+   if (tree1 == NULL&&tree2==NULL) return 1;//그래서 다 널이 되었을때 처리가 되는구나 재귀ㅣ로 계속 올라오다가
+   if (tree1 == NULL || tree2==NULL) return 0; //같을때는 위에서 처리됬을꺼니까
+   if (tree1->item!=tree2->item) return 0;
+   return identical(tree1->left,tree2->left)&&identical(tree1->right,tree2->right);//위에서 예외처리 다 했다 재귀로 생성
+
 }
 
 /////////////////////////////////////////////////////////////////////////////////

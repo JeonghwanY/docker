@@ -13,7 +13,7 @@ Purpose: Implementing the required functions for Question 7 */
 
 typedef struct _listnode
 {
-	int item;
+	int item;            
 	struct _listnode *next;
 } ListNode;			// You should not change the definition of ListNode
 
@@ -88,6 +88,13 @@ int main()
 void RecursiveReverse(ListNode **ptrHead)
 {
 	/* add your code here */
+	if ((*ptrHead)==NULL || (*ptrHead)->next==NULL) return;
+	ListNode *first=*ptrHead,*rest=first->next;
+	
+	RecursiveReverse(&rest);
+	first->next->next=first;
+	first->next=NULL;
+	*ptrHead=rest;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

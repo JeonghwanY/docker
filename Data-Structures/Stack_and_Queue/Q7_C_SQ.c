@@ -105,6 +105,26 @@ int main()
 int balanced(char *expression)
 {
 /* add your code here */
+char stack[1000];
+int top=-1;
+for(int i=0;expression[i]!='\0';i++){
+	char c=expression[i];
+	if(c=='('|| c == '['|| c== '{' ){
+		stack[++top]=c;
+	}
+	else if (c==')'||c==']'||c=='}'){
+		if(top == -1) return 1;//진짜 값을 빼는게 아니라 top으로 pop push를 구현하는것이기 때문에.
+	char last=stack[top--];
+	if ((c==')'&&last!='(')||
+		(c=='}'&&last!='{')||
+		(c==']'&&last!='[')) return 1;
+	}
+}
+return 0;
+// if (top==-1)
+// 	return 0;
+// else
+// 	return 1;        ////////return top == -1 ? 0 : 1;
 }
 
 ////////////////////////////////////////////////////////////

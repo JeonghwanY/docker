@@ -89,6 +89,27 @@ int main()
 int moveMaxToFront(ListNode **ptrHead)
 {
     /* add your code here */
+	ListNode *max = *ptrHead;//리스트노드의 주소면 리스트노드의 값이겠지 아니면 이건 ll연결리스트를 주소로 보는거아닐까?
+	ListNode *maxprev = NULL;
+	ListNode *prev = *ptrHead;
+	ListNode *cur = (*ptrHead)->next;//이게 꼐속쓰던 ll->next
+
+	
+
+	while(cur!=NULL){//연결리스트
+		if(cur->item > max->item){
+			max=cur;
+			maxprev=prev;
+		}
+		prev=cur;
+		cur=cur->next;
+	}
+	if (max==*ptrHead) return 0;
+	maxprev->next=max->next;
+	max->next=*ptrHead;
+	*ptrHead=max;
+	return 1;//필요한가
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////
